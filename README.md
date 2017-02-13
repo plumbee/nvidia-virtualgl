@@ -41,3 +41,7 @@ nvidia-docker run -d \
 xhost -local:root # resetting permissions
 ```
 And now go and have fun creating your own dockerised versions of Blender, Firefox, Chrome...
+
+# Related posts:
+- https://medium.com/@pigiuz/setting-up-a-hw-accelerated-desktop-on-aws-g2-instances-4b58718a4541#.g80twxf4f
+- https://medium.com/@pigiuz/hw-accelerated-gui-apps-on-docker-7fd424fe813e#.e0bhg911w
