@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     dpkg -i virtualgl_*_amd64.deb && \
     /opt/VirtualGL/bin/vglserver_config -config +s +f -t && \
     rm virtualgl_*_amd64.deb && \
+    apt-get clean && \
     apt-get remove -y curl ca-certificates && \
     rm -rf /var/lib/apt/lists/*
 
