@@ -1,13 +1,15 @@
 FROM ubuntu:16.04
 
-# install VirtualGl 2.5.1
-RUN apt-get update && apt-get install -y \
-    libglu1-mesa-dev mesa-utils wget xterm && \
-    wget http://downloads.sourceforge.net/project/virtualgl/2.5.1/virtualgl_2.5.1_amd64.deb && \
-    dpkg -i virtualgl_2.5.1_amd64.deb && \
+ENV VIRTUALGL_VERSION 2.5.2
+
+# install VirtualGL
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libglu1-mesa-dev mesa-utils curl ca-certificates xterm && \
+    curl -sSL https://downloads.sourceforge.net/project/virtualgl/"${VIRTUALGL_VERSION}"/virtualgl_"${VIRTUALGL_VERSION}"_amd64.deb -o virtualgl_"${VIRTUALGL_VERSION}"_amd64.deb && \
+    dpkg -i virtualgl_*_amd64.deb && \
     /opt/VirtualGL/bin/vglserver_config -config +s +f -t && \
-    rm virtualgl_2.5.1_amd64.deb && \
-    apt-get remove -y wget && \
+    rm virtualgl_*_amd64.deb && \
+    apt-get remove -y curl ca-certificates && \
     rm -rf /var/lib/apt/lists/*
 
 # nvidia-docker links
