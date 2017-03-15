@@ -7,12 +7,25 @@ This is intended to be a bridge between the host X server and the container.
 Tested on nvidia-docker 1.0.0 https://github.com/NVIDIA/nvidia-docker/releases
 
 # Launch commands
+## VirtualGL 2.5.2
 ```bash
 xhost +local:root
 nvidia-docker run -d \
      --env="DISPLAY" \
      --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
-     plumbee/nvidia-virtualgl vglrun glxgears
+     --volume="/usr/lib/x86_64-linux-gnu/libXv.so.1:/usr/lib/x86_64-linux-gnu/libXv.so.1" \
+     plumbee/nvidia-virtualgl:2.5.2 vglrun glxgears
+xhost -local:root # resetting permissions
+```
+
+
+## VirtualGL 2.5.1
+```bash
+xhost +local:root
+nvidia-docker run -d \
+     --env="DISPLAY" \
+     --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
+     plumbee/nvidia-virtualgl:2.5.1 vglrun glxgears
 xhost -local:root # resetting permissions
 ```
 
